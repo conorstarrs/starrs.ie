@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MightE — Order Sheet (VAT Included)</title>
+<style>
+  :root{
+    --brand:#0b3a69;
+    --whatsapp:#25D366;
+    --border:#d9d9d9;
+    --bg:#f7f7f9;
+    --text:#222;
+  }
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;margin:0;color:var(--text);background:#fff}
+  .wrap{max-width:860px;margin:0 auto;padding:16px 16px 88px} /* bottom padding for fixed bar */
+  header{display:flex;align-items:center;gap:12px;margin:10px 0 6px}
+  .logo{font-weight:800;font-size:24px;letter-spacing:.2px;color:var(--brand)}
+  .sub{font-size:13px;color:#555;margin:6px 0 12px}
+  fieldset{border:1px solid var(--border);border-radius:10px;padding:10px;margin:10px 0}
+  legend{font-weight:700;padding:0 6px}
+  label{display:block;padding:5px 0;line-height:1.3}
+  .summary{margin-top:14px;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:10px}
+  .summary p{margin:6px 0}
+  .summary .total{font-size:20px;font-weight:800;color:var(--brand)}
+  .fine{font-size:12px;color:#666}
+  .fixedbar{
+    position:fixed;left:0;right:0;bottom:0;z-index:999;
+    background:#fff;border-top:1px solid var(--border);
+    padding:10px 14px;display:flex;align-items:center;gap:10px;justify-content:center;
+  }
+  .fixedbar .amount{font-weight:800;color:var(--brand);font-size:18px;min-width:160px;text-align:center}
+  .btn{padding:12px 16px;border-radius:999px;border:1px solid #c9c9c9;background:#fff;cursor:pointer}
+  .btn:active{transform:scale(.99)}
+  .btn-wa{background:var(--whatsapp);color:#fff;border:none;font-weight:700}
+  .btn-copy{background:#fff}
+  .sr-only{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
+  small{color:#666}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">MightE</div>
+  </header>
+  <p class="sub">Build your MightE kit below. Prices include VAT. Totals update automatically. When ready, tap <b>Send via WhatsApp</b> to place your order.</p>
+
+  <form id="configForm" autocomplete="off">
+    <!-- Powertrains -->
+    <fieldset>
+      <legend>Powertrains</legend>
+      <label><input type="radio" name="powertrain" value="0" checked> None (£0)</label>
+      <label><input type="radio" name="powertrain" value="2100"> Bambino Powertrain — MSUK Spec (New) — £2,100</label>
+      <label><input type="radio" name="powertrain" value="1700"> Bambino Powertrain — MSUK Spec (Used) — £1,700</label>
+      <label><input type="radio" name="powertrain" value="2350"> MightE MiamE — £2,350 <small>(Faster; not MSUK spec — testing & non‑MSUK events; uses Heidenau tyres)</small></label>
+    </fieldset>
+
+    <!-- Mounts -->
+    <fieldset>
+      <legend>Mounts</legend>
+      <label><input type="radio" name="mount" value="0" checked> None (£0)</label>
+      <label><input type="radio" name="mount" value="195"> RCE / Tony Kart Mount (New) — £195</label>
+      <label><input type="radio" name="mount" value="120"> RCE / Tony Kart Mount (Used) — £120</label>
+      <label><input type="radio" name="mount" value="195"> Wright / Synergy Mount (New) — £195</label>
+      <label><input type="radio" name="mount" value="120"> Wright / Synergy Mount (Used) — £120</label>
+    </fieldset>
+
+    <!-- Batteries -->
+    <fieldset>
+      <legend>Batteries</legend>
+      <label><input type="radio" name="battery" value="0" checked> None (£0)</label>
+      <label><input type="radio" name="battery" value="1800"> New Light (9.6 kg) — £1,800</label>
+      <label><input type="radio" name="battery" value="2100"> New Superlight (7.8 kg) — £2,100</label>
+      <label><input type="radio" name="battery" value="1200"> Standard Used (12.5 kg) — £1,200</label>
+    </fieldset>
+
+    <!-- Tyres -->
+    <fieldset>
+      <legend>Tyres</legend>
+      <label><input type="checkbox" class="opt" value="180"> LeCont All‑Weather — used at Motorsport UK events (set) — £180</label>
+      <label><input type="checkbox" class="opt" value="180"> Heidenau Slicks (MiamE) (set) — £180</label>
+      <label><input type="checkbox" class="opt" value="180"> Heidenau Wets (MiamE) (set) — £180</label>
+    </fieldset>
+
+    <!-- Bottom Clamps -->
+    <fieldset>
+      <legend>Bottom Clamps</legend>
+      <label><input type="checkbox" class="opt" value="45"> RCE / Tony Kart / Wright / Synergy — £45</label>
+    </fieldset>
+
+    <!-- Fittings & Parts -->
+    <fieldset>
+      <legend>Fittings & Parts</legend>
+      <label><input type="checkbox" class="opt" value="5"> Spare Throttle Cable — £5</label>
+      <label><input type="checkbox" class="opt" value="55"> MightE‑specific Chain Guard — £55</label>
+      <label><input type="checkbox" class="opt" value="30"> Top Cover Graphic — £30</label>
+      <label><input type="checkbox" class="opt" value="35"> Spare Power Switch — £35</label>
+      <label><input type="checkbox" class="opt" value="95"> Spare Throttle Potentiometer — £95</label>
+      <label><input type="checkbox" class="opt" value="35"> RCE Chain (128 link) — £35</label>
+      <label><input type="checkbox" class="opt" value="35"> Synergy / Tony Kart / Wright Chain — £35</label>
+    </fieldset>
+
+    <!-- Sprockets -->
+    <fieldset>
+      <legend>Sprockets</legend>
+      <label><input type="checkbox" class="opt" value="35"> Spare Axle Sprocket (63T) — £35</label>
+      <label><input type="checkbox" class="opt" value="120"> Spare Motor Sprocket — £120</label>
+    </fieldset>
+
+    <!-- Chargers -->
+    <fieldset>
+      <legend>Chargers</legend>
+      <label><input type="radio" name="charger" value="0" checked> None (£0)</label>
+      <label><input type="radio" name="charger" value="150"> Standard — £150</label>
+      <label><input type="radio" name="charger" value="245"> Fast (50% faster) — £245</label>
+    </fieldset>
+
+    <!-- Services & Add-ons -->
+    <fieldset>
+      <legend>Services & Add‑ons</legend>
+      <label><input type="checkbox" class="opt" value="100"> Expert fitting at an installation centre — £100</label>
+      <label><input type="checkbox" class="opt" value="450" data-warranty> 24‑month warranty + any servicing + free firmware updates — £450</label>
+      <label><input type="checkbox" class="opt" value="750" data-deposit="2000"> 2‑week demo kart hire — £750 (+ £2,000 refundable deposit)</label>
+      <label><input type="checkbox" class="opt" value="500" data-deposit="1000"> 2‑week powertrain hire — £500 (+ £1,000 refundable deposit)</label>
+      <label><input type="checkbox" class="opt" value="500"> Race weekend with a professional team (from) — £500</label>
+    </fieldset>
+
+    <!-- Chassis Packages -->
+    <fieldset>
+      <legend>Chassis Packages</legend>
+      <label><input type="radio" name="chassis" value="0" checked> None (£0)</label>
+      <label><input type="radio" name="chassis" value="2350"> Complete RCE — Ready to Race — £2,350</label>
+      <label><input type="radio" name="chassis" value="1650"> Complete Used RCE — Ready to Race — £1,650</label>
+      <label><input type="radio" name="chassis" value="1900"> Complete Synergy chassis (needs assembly) — £1,900</label>
+      <label><input type="radio" name="chassis" value="1000"> Used Synergy — £1,000</label>
+      <label><input type="radio" name="chassis" value="1800"> New Tony Kart / Exprit — Assembled, Ready to Race — £1,800</label>
+    </fieldset>
+  </form>
+
+  <!-- Summary -->
+  <div class="summary">
+    <p>Components Total: £<span id="components">0</span></p>
+    <p>Chassis/Package: £<span id="chassisTotal">0</span></p>
+    <p>Deposits (refundable): £<span id="deposits">0</span></p>
+    <p class="total">Total (VAT included): £<span id="grandTotal">0</span></p>
+    <p class="fine">Warranty can only be added when an order contains at least one priced item or package.</p>
+    <p class="fine"><b>Guaranteed Buy Back:</b> after use — 1 year: 50%; 2 years: 40%; 3 years: 30% of purchase price. Terms & Conditions apply.</p>
+  </div>
+</div>
+
+<!-- Fixed bottom action bar -->
+<div class="fixedbar">
+  <div class="amount">Total: £<span id="barTotal">0</span></div>
+  <button type="button" class="btn btn-wa" id="waBtn">Send via WhatsApp</button>
+  <button type="button" class="btn btn-copy" id="copyBtn">Copy Order</button>
+  <textarea id="orderText" class="sr-only"></textarea>
+</div>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id)}
+  function num(n){return Math.round(Number(n)||0)}
+  function radio(name){
+    const el=document.querySelector('input[name="'+name+'"]:checked'); 
+    return el?num(el.value):0;
+  }
+  function radioLabel(name){
+    const el=document.querySelector('input[name="'+name+'"]:checked'); 
+    return el?el.parentElement.innerText.trim():null;
+  }
+  function update(){
+    let components=0, chassis=0, deposits=0;
+    const lines=[];
+
+    // radios that count as components
+    ['powertrain','mount','battery','charger'].forEach(name=>{
+      const v=radio(name);
+      if(v>0){ lines.push(radioLabel(name)); }
+      components += v;
+    });
+
+    // chassis separately
+    const ch=radio('chassis');
+    if(ch>0){ lines.push(radioLabel('chassis')); }
+    chassis += ch;
+
+    // checkboxes (all have class 'opt')
+    document.querySelectorAll('input.opt').forEach(cb=>{
+      if(cb.checked){
+        const v = num(cb.value||0);
+        if(cb.dataset.deposit){ deposits += num(cb.dataset.deposit); }
+        if(cb.dataset.warranty){
+          if(components+chassis>0){ components+=v; lines.push(cb.parentElement.innerText.trim()); }
+        } else {
+          components+=v; lines.push(cb.parentElement.innerText.trim());
+        }
+      }
+    });
+
+    const subtotal = components + chassis;
+    const grand = subtotal + deposits; // VAT already included in prices
+
+    // write
+    $('components').textContent = components.toLocaleString();
+    $('chassisTotal').textContent = chassis.toLocaleString();
+    $('deposits').textContent = deposits.toLocaleString();
+    $('grandTotal').textContent = grand.toLocaleString();
+    $('barTotal').textContent = grand.toLocaleString();
+
+    const list = lines.length? lines : ['No options selected'];
+    const txt = "MightE Order (VAT included):\n\n" + list.join("\n") +
+      "\n\nComponents + Chassis: £" + subtotal.toLocaleString() +
+      "\nDeposits (refundable): £" + deposits.toLocaleString() +
+      "\nTotal: £" + grand.toLocaleString();
+    $('orderText').value = txt;
+  }
+
+  function copyOrder(){
+    update();
+    const t = $('orderText').value;
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(()=>alert('Order copied to clipboard'));
+    }else{
+      window.prompt('Copy order:', t);
+    }
+  }
+
+  function sendWA(){
+    update();
+    const t = encodeURIComponent($('orderText').value);
+    // Your number pre-filled:
+    window.open('https://wa.me/447592275968?text='+t, '_blank');
+  }
+
+  function wire(){
+    document.querySelectorAll('#configForm input').forEach(el=>{
+      el.addEventListener('change', update);
+      el.addEventListener('input', update);
+    });
+    $('copyBtn').addEventListener('click', copyOrder);
+    $('waBtn').addEventListener('click', sendWA);
+    update();
+  }
+
+  document.addEventListener('DOMContentLoaded', wire);
+})();
+</script>
+</body>
+</html>
